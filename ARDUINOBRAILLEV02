@@ -1,0 +1,151 @@
+#include<EEPROM.h>
+//variables para los botones 
+const int  boton1 = 2;
+const int  boton2 = 3;
+/////////////////////////
+const int  boton3 = 4;
+const int  boton4 = 5;
+/////////////////////////
+const int  boton5 = 6;
+const int  boton6 = 7;
+//variables para los led 
+const int led1 = 8;
+const int led2 = 9;
+const int led3 = 10;
+const int led4 = 11;
+const int led5 = 12;
+/////////////////////////
+//valores para la eeprom
+byte ee_valor0;
+byte ee_valor1;
+byte ee_valor2;
+byte ee_valor3;
+byte ee_valor4; 
+//valores para actualizar 
+int estadoboton1 = 0;
+int estadoboton2 = 0;
+///////////////////
+int estadoboton3 = 0;
+int estadoboton4 = 0;
+///////////////////
+int estadoboton5 = 0;
+int estadoboton6 = 0;
+void setup() {
+  //se leen los valores de la eeprom y se asignan a las variables ee_valor
+  ee_valor0=EEPROM.read(0);
+  ee_valor1=EEPROM.read(1);
+  ee_valor2=EEPROM.read(2);
+  ee_valor3=EEPROM.read(3);
+  ee_valor4=EEPROM.read(4); 
+  //definicion salidas y entradas 
+  //LEDS
+  pinMode(led1,OUTPUT);
+  pinMode(led2,OUTPUT);
+  pinMode(led3,OUTPUT);
+  pinMode(led4,OUTPUT);
+  pinMode(led5,OUTPUT);
+  //BOTONES
+  pinMode(boton1,INPUT);
+  pinMode(boton2,INPUT);
+  pinMode(boton3,INPUT);
+  pinMode(boton4,INPUT);
+  pinMode(boton5,INPUT);
+  pinMode(boton6,INPUT);
+  //compara el valor contenido en las posiciones de la eeprom
+  if(ee_valor0==1)
+  {
+  digitalWrite(led1,HIGH);
+  }
+  if(ee_valor0==0)
+  {
+  digitalWrite(led1,LOW);
+  }
+if(ee_valor1==1)
+  {
+  digitalWrite(led2,HIGH);
+  }
+  if(ee_valor1==0)
+  {
+  digitalWrite(led2,LOW);
+  }
+  if(ee_valor2==1)
+  {
+  digitalWrite(led3,HIGH);
+  }
+  if(ee_valor2==0)
+  {
+  digitalWrite(led3,LOW);
+  }
+  if(ee_valor3==1)
+  {
+  digitalWrite(led4,HIGH);
+  }
+  if(ee_valor3==0)
+  {
+  digitalWrite(led4,LOW);
+  }
+  if(ee_valor4==1)
+  {
+  digitalWrite(led5,HIGH);
+  }
+  if(ee_valor4==0)
+  {
+  digitalWrite(led5,LOW);
+  }
+}
+
+void loop() {
+  //leer estados 
+  estadoboton1 = digitalRead(boton1);
+  //delay(1000);
+  estadoboton2 = digitalRead(boton2);
+  //delay(1000);
+  estadoboton3 = digitalRead(boton3);
+  //delay(1000);
+  estadoboton4 = digitalRead(boton4);
+  //delay(1000);
+  estadoboton5 = digitalRead(boton5);
+  ///delay(1000);
+  estadoboton6 = digitalRead(boton6);
+  //delay(1000);
+  //escribir en la eeprom 
+  if (estadoboton1==HIGH);
+  {
+    digitalWrite(led1,HIGH);
+    EEPROM.write(0,1);
+  }
+  if (estadoboton2==HIGH);
+  {
+    digitalWrite(led2,HIGH);
+    EEPROM.write(1,1);
+  }
+  if (estadoboton3==HIGH);
+  {
+    digitalWrite(led3,HIGH);
+    EEPROM.write(2,1);
+  }
+  if (estadoboton4==HIGH);
+  {
+    digitalWrite(led4,HIGH);
+    EEPROM.write(3,1);
+  }
+  if (estadoboton5==HIGH);
+  {
+    digitalWrite(led1,HIGH);
+    EEPROM.write(4,1);
+  }
+if (estadoboton6==HIGH);
+  {
+    EEPROM.write(0,0);
+    digitalWrite(led1,LOW);
+    EEPROM.write(1,0);
+    digitalWrite(led2,LOW);
+    EEPROM.write(2,0);
+    digitalWrite(led3,LOW);
+    EEPROM.write(3,0);
+    digitalWrite(led4,LOW);
+    EEPROM.write(4,0);
+    
+  }
+  
+}
